@@ -24,6 +24,10 @@
     for (var i = 0; i < fireworkCanon.bullets.length; i++) {
       fireworkCanon.bullets[i].draw(fireworkCanon.ctx);
       fireworkCanon.bullets[i].update(fireworkCanon.canvas);
+      if (fireworkCanon.bullets[i].disappear) {
+
+        fireworkCanon.bullets.splice(i, 1);
+      }
     }
   }
   fireworkCanon.load = function (){
