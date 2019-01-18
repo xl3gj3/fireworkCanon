@@ -25,6 +25,9 @@ function bulletObj(postionX,positionY,mouseX,mouseY,ctx){
   let maxRadius = 10;
   let minRadius = 4;
   let canonLength = 75;
+  let maxTime = 2000;
+  let minTime = 500;
+
   var colorArray = [
     "#0063B0",
     "#0CBAE8",
@@ -32,13 +35,16 @@ function bulletObj(postionX,positionY,mouseX,mouseY,ctx){
     "#0CE8AE",
     "#0DFF82"
   ];
+  this.color = "white";
+  this.fireWorkColor = colorArray;
+  this.bulletDuriation = minTime + Math.round(Math.random()*maxTime);
   let changeXdirection = false;
 
   let opposite = fireworkCanon.canvas.height - mouseY;
   let adjacent = fireworkCanon.canvas.width/2 - mouseX;
-  let canonLength  = 75
+  let canonHeight  = 75
   this.centerX = canvas.width/2;
-  this.centerY = canvas.height - canonLength;
+  this.centerY = canvas.height - canonHeight;
   this.bigRadius = 50;
   let angle = -Math.atan( adjacent/opposite);
   let sin = Math.sin(angle);
@@ -66,7 +72,7 @@ function bulletObj(postionX,positionY,mouseX,mouseY,ctx){
   // console.log("bullet dy ", this.dy);
 
   this.radius = minRadius;
-  this.color = colorArray[Math.floor(Math.random() * colorArray.length)];
+  // this.color = colorArray[Math.floor(Math.random() * colorArray.length)];
 
 }
 
@@ -82,14 +88,16 @@ bulletObj.prototype.update = function(canvas){
   this.disappear = false;
   if (this.x > canvas.width - this.radius || this.x - this.radius < 0) {
     this.dx = -this.dx;
-    this.disappear = true;
 
   }
   if (this.y + this.radius > canvas.height || this.y -this.radius < 0) {
     this.dy= -this.dy;
-    this.disappear = true;
 
   }
+  if (this.bulletDuriation < 0) {
+    this.disappear = true;
+  }
+  this.bulletDuriation -= 20;
   this.x += this.dx;
   this.y += this.dy;
 }

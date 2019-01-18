@@ -25,7 +25,7 @@
       fireworkCanon.bullets[i].draw(fireworkCanon.ctx);
       fireworkCanon.bullets[i].update(fireworkCanon.canvas);
       if (fireworkCanon.bullets[i].disappear) {
-
+        fireworkCanon.explosion.queue(fireworkCanon.bullets[i].x,fireworkCanon.bullets[i].y,fireworkCanon.bullets[i].fireWorkColor,fireworkCanon.canvas,fireworkCanon.ctx)
         fireworkCanon.bullets.splice(i, 1);
       }
     }
