@@ -25,8 +25,8 @@ function bulletObj(postionX,positionY,mouseX,mouseY,ctx){
   let maxRadius = 10;
   let minRadius = 4;
   let canonLength = 75;
-  let maxTime = 2000;
-  let minTime = 500;
+  let maxTime = 1000;
+  let minTime = 100;
 
   var colorArray = [
     "#0063B0",
@@ -49,8 +49,8 @@ function bulletObj(postionX,positionY,mouseX,mouseY,ctx){
   let angle = -Math.atan( adjacent/opposite);
   let sin = Math.sin(angle);
   let cos = Math.cos(angle)
-  console.log("this is sin" , sin);
-  console.log("this is cos" , cos);
+  // console.log("this is sin" , sin);
+  // console.log("this is cos" , cos);
   if (adjacent < 0) {
     // adjacent = -adjacent;
     changeXdirection = true;
@@ -97,7 +97,20 @@ bulletObj.prototype.update = function(canvas){
   if (this.bulletDuriation < 0) {
     this.disappear = true;
   }
-  this.bulletDuriation -= 20;
+  this.bulletDuriation -= 15;
   this.x += this.dx;
   this.y += this.dy;
+}
+
+function fireworkObj (positionX,positionY,colorArray,canvas,ctx){
+  this.x = positionX;
+  this.y = positionY;
+  this.color = colorArray;
+  this.ctx = ctx;
+  this.canvas = canvas;
+
+}
+
+fireworkObj.prototype.draw = function (){
+
 }

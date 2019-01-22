@@ -9,6 +9,8 @@
     y : undefined
   }
   fireworkCanon.bullets = [];
+  fireworkCanon.fireExplosion = [];
+
   function main (){
     window.requestAnimationFrame(main);
     // console.log("mouse x position", fireworkCanon.mouse.x);
@@ -25,10 +27,19 @@
       fireworkCanon.bullets[i].draw(fireworkCanon.ctx);
       fireworkCanon.bullets[i].update(fireworkCanon.canvas);
       if (fireworkCanon.bullets[i].disappear) {
-        fireworkCanon.explosion.queue(fireworkCanon.bullets[i].x,fireworkCanon.bullets[i].y,fireworkCanon.bullets[i].fireWorkColor,fireworkCanon.canvas,fireworkCanon.ctx)
+        let explosion = new fireworkExplosion(fireworkCanon.bullets[i].x,fireworkCanon.bullets[i].y,fireworkCanon.bullets[i].fireWorkColor,fireworkCanon.canvas,fireworkCanon.ctx);
+        fireworkCanon.fireExplosion.push(explosion);
         fireworkCanon.bullets.splice(i, 1);
       }
     }
+    for (var i = 0; i < fireworkCanon.fireExplosion.length; i++) {
+      fireworkCanon.fireExplosion[i].draw(fireworkCanon.ctx);
+      fireworkCanon.fireExplosion[i].update(fireworkCanon.canvas);
+      if (fireworkCanon.fireExplosion[i].disappear) {
+        fireworkCanon.fireExplosion.splice(i, 1);
+      }
+    }
+
   }
   fireworkCanon.load = function (){
     setEnv();
