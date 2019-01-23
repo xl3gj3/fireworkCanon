@@ -1,41 +1,57 @@
 function fireworkExplosion (positionX,positionY,color,canvas,ctx){
-  let maxTime = 2200;
-  let minTime = 1500;
+  let maxTime = 600;
+  let minTime = 100;
+  let maxSpeed = 10;
+  let minSpeed = -5;
   this.postionX = positionX;
   this.positionY = positionY;
-  this.color = color;
+  // this.color = color;
   this.canvas = canvas;
   this.ctx = ctx;
   this.disappear = false;
   this.duriation = minTime + Math.random() * maxTime;
-  this.dx = [-5,-5,0,5,5];
-  this.dy = [-5,5,-5,5,-5];
-  this.x = [positionX,positionX,positionX,positionX,positionX];
-  this.y = [positionY,positionY,positionY,positionY,positionY];
-
+  this.dx = [];
+  this.dy = [];
+  this.x = [];
+  this.y = [];
+  this.numberOfexplosion = 50;
+  this.color = color[Math.floor(Math.random() * color.length)];
   this.radius = 3;
+  // console.log("init this.duriation",this.duriation);
+  for (var i = 0; i <this.numberOfexplosion; i++) {
+    this.dx.push(minSpeed + Math.random() * maxSpeed);
+    this.dy.push(minSpeed + Math.random() * maxSpeed);
+    this.x.push(positionX);
+    this.y.push(positionY);
+  }
 
 
 }
 
 fireworkExplosion.prototype.draw = function (){
-  for (var i = 0; i < this.color.length; i++) {
+  // console.log("this color ", this.color);
+  for (var i = 0; i < this.numberOfexplosion; i++) {
     this.ctx.beginPath();
     this.ctx.arc(this.x[i],this.y[i],this.radius,0,Math.PI*2,false);
-    this.ctx.strokeStyle = this.color[i];
-    this.ctx.fillStyle = this.color[i];
+    this.ctx.strokeStyle = this.color;
+    this.ctx.fillStyle = this.color;
     this.ctx.stroke();
     this.ctx.fill();
   }
 }
 
 fireworkExplosion.prototype.update = function (){
-  for (var i = 0; i < this.color.length; i++) {
+  // console.log("the duriation of firework is ",this.duriation);
+
+  for (var i = 0; i < this.numberOfexplosion; i++) {
     if (this.duriation < 0) {
+      // console.log("this.disappear ",this.disappear);
+
       this.disappear = true;
     }
-    this.duriation -= 15;
     this.x[i] = this.x[i] + this.dx[i];
     this.y[i] = this.y[i] + this.dy[i];
   }
+  this.duriation -= 15;
+
 }

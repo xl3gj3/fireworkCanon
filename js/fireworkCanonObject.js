@@ -35,8 +35,21 @@ function bulletObj(postionX,positionY,mouseX,mouseY,ctx){
     "#0CE8AE",
     "#0DFF82"
   ];
+  var colorArray2 = [
+  "#DB2B30",
+  "#8F1D2C",
+  "#5A142A",
+  "#400D2A",
+  "#140A25"
+];
   this.color = "white";
-  this.fireWorkColor = colorArray;
+  if (Math.random() - 0.5 > 0) {
+    this.fireWorkColor = colorArray;
+
+  }else {
+    this.fireWorkColor = colorArray2;
+
+  }
   this.bulletDuriation = minTime + Math.round(Math.random()*maxTime);
   let changeXdirection = false;
 

@@ -33,8 +33,9 @@
       }
     }
     for (var i = 0; i < fireworkCanon.fireExplosion.length; i++) {
-      fireworkCanon.fireExplosion[i].draw(fireworkCanon.ctx);
-      fireworkCanon.fireExplosion[i].update(fireworkCanon.canvas);
+      // console.log("fireworkCanon.fireExplosion.length",fireworkCanon.fireExplosion.length);
+      fireworkCanon.fireExplosion[i].draw();
+      fireworkCanon.fireExplosion[i].update();
       if (fireworkCanon.fireExplosion[i].disappear) {
         fireworkCanon.fireExplosion.splice(i, 1);
       }
