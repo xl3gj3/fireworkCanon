@@ -31,6 +31,42 @@
           "#140A25"
         ];
         break;
+      case 3:
+          fireworkCanon.colorSet = [
+          "#FF6138",
+          "#FFFF9D",
+          "#BEEB9F",
+          "#79BD8F",
+          "#00A388"
+        ];
+        break;
+      case 4:
+          fireworkCanon.colorSet = [
+          "#F1712A",
+          "#F0C419",
+          "#4EBA6F",
+          "#2D95BF",
+          "#955BA5"
+        ];
+        break;
+      case 5:
+          fireworkCanon.colorSet = [
+          "#E2BBFF",
+          "#BCAAE8",
+          "#C8C7FF",
+          "#AAB9E8",
+          "#BBDEFF"
+        ];
+        break;
+      case 6:
+          fireworkCanon.colorSet = [
+          "#DB4BE0",
+          "#F7B2F7",
+          "#F8FCF5",
+          "#EEC1FF",
+          "#C7BBC6"
+        ];
+        break;
       default:
 
     }
