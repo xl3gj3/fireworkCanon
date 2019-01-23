@@ -10,6 +10,31 @@
   }
   fireworkCanon.bullets = [];
   fireworkCanon.fireExplosion = [];
+  fireworkCanon.colorSet = [];
+  fireworkCanon.loadColor = function (id){
+    switch (id) {
+      case 1:
+          fireworkCanon.colorSet = [
+            "#F0F2F2",
+            "#7BB094",
+            "#8DBF28",
+            "#C0DB84",
+            "#49BA63"
+        ];
+        break;
+      case 2:
+          fireworkCanon.colorSet = [
+          "#DB2B30",
+          "#8F1D2C",
+          "#5A142A",
+          "#400D2A",
+          "#140A25"
+        ];
+        break;
+      default:
+
+    }
+  }
 
   function main (){
     window.requestAnimationFrame(main);
@@ -27,7 +52,7 @@
       fireworkCanon.bullets[i].draw(fireworkCanon.ctx);
       fireworkCanon.bullets[i].update(fireworkCanon.canvas);
       if (fireworkCanon.bullets[i].disappear) {
-        let explosion = new fireworkExplosion(fireworkCanon.bullets[i].x,fireworkCanon.bullets[i].y,fireworkCanon.bullets[i].fireWorkColor,fireworkCanon.canvas,fireworkCanon.ctx);
+        let explosion = new fireworkExplosion(fireworkCanon.bullets[i].x,fireworkCanon.bullets[i].y,fireworkCanon.colorSet,fireworkCanon.canvas,fireworkCanon.ctx);
         fireworkCanon.fireExplosion.push(explosion);
         fireworkCanon.bullets.splice(i, 1);
       }
