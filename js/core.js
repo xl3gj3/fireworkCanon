@@ -55,8 +55,8 @@
     window.addEventListener('resize',function(){
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-      maxNumber = Math.floor(Math.random()*200 + (canvas.width + canvas.height)/2);
-      console.log("number of dot is ", maxNumber) ;
+      // maxNumber = Math.floor(Math.random()*200 + (canvas.width + canvas.height)/2);
+      // console.log("number of dot is ", maxNumber) ;
     });
     window.addEventListener('mousemove',function(event){
   // console.log("test mouse");
