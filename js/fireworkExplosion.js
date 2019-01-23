@@ -1,8 +1,8 @@
 function fireworkExplosion (positionX,positionY,color,canvas,ctx){
-  let maxTime = 600;
-  let minTime = 100;
-  let maxSpeed = 10;
-  let minSpeed = -5;
+  let maxTime = 100;
+  let minTime = 500;
+  let maxSpeed = 6;
+  let minSpeed = -3;
   this.postionX = positionX;
   this.positionY = positionY;
   // this.color = color;
@@ -15,7 +15,7 @@ function fireworkExplosion (positionX,positionY,color,canvas,ctx){
   this.x = [];
   this.y = [];
   this.color = [];
-  this.numberOfexplosion = 50;
+  this.numberOfexplosion = 20 + Math.floor(Math.random()*30);
   this.radius = 3;
   // console.log("init this.duriation",this.duriation);
   for (var i = 0; i <this.numberOfexplosion; i++) {
@@ -48,6 +48,17 @@ fireworkExplosion.prototype.update = function (){
     if (this.duriation < 0) {
       // console.log("this.disappear ",this.disappear);
 
+      this.disappear = true;
+    }
+    // if (this.x[i] > this.canvas.width - this.radius || this.x[i] - this.radius < 0) {
+    //   this.dx[i] = -this.dx[i];
+    //
+    // }
+    // if (this.y[i] + this.radius > this.canvas.height || this.y[i] -this.radius < 0) {
+    //   this.dy[i]= -this.dy[i];
+    //
+    // }
+    if (this.bulletDuriation < 0) {
       this.disappear = true;
     }
     this.x[i] = this.x[i] + this.dx[i];
