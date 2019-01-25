@@ -27,7 +27,9 @@ function bulletObj(postionX,positionY,mouseX,mouseY,ctx,staticColor){
   let canonLength = 75;
   let maxTime = 1000;
   let minTime = 100;
-
+  this.directionBoundary = 0.3;
+  this.radians = Math.random() * Math.PI * 2;
+  this.velocity = Math.random() + 0.05;
   this.color = staticColor;
   // ctx.fillStyle = color[Math.floor(Math.random() * color.length)];
 
@@ -105,6 +107,12 @@ bulletObj.prototype.update = function(canvas){
     this.disappear = true;
   }
   this.bulletDuriation -= 15;
-  this.x += this.dx;
-  this.y += this.dy;
+  if (Math.random()>this.directionBoundary) {
+    this.x = this.x + this.dx;
+    this.y = this.y + this.dy;
+  }else {
+    this.radians += this.velocity;
+    this.x = this.x + Math.cos(this.radians)*5;
+    this.y = this.y + Math.sin(this.radians)*5;
+  }
 }
