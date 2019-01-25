@@ -26,7 +26,7 @@ function bulletObj(postionX,positionY,mouseX,mouseY,ctx,staticColor){
   let minRadius = 4;
   let canonLength = 75;
   let maxTime = 200;
-  let minTime = 800;
+  let minTime = 1000;
   this.directionBoundary = 0.3;
   this.radians = Math.random() * Math.PI * 2;
   this.velocity = Math.random() + 0.05;
