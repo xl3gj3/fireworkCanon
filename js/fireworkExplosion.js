@@ -16,7 +16,8 @@ function fireworkExplosion (positionX,positionY,color,canvas,ctx){
   this.y = [];
   this.color = [];
   this.lastPoint = [];
-  this.numberOfexplosion = 50 + Math.floor(Math.random()*40);
+  this.numberOfexplosion = 10 + Math.floor(Math.random()*150);
+  // this.radius = [];
   this.radius = 0.1 + Math.random() * 4;
   // console.log("init this.duriation",this.duriation);
   for (var i = 0; i <this.numberOfexplosion; i++) {
@@ -24,6 +25,7 @@ function fireworkExplosion (positionX,positionY,color,canvas,ctx){
     this.dy.push(minSpeed + Math.random() * maxSpeed);
     this.x.push(positionX);
     this.y.push(positionY);
+    // this.radius.push = 0.1 + Math.random() * 5;
     this.color.push(color[Math.floor(Math.random() * color.length)]);
   }
 

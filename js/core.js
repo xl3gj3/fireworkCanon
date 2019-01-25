@@ -78,11 +78,11 @@
     // console.log("mouse y position", fireworkCanon.mouse.y);
     fireworkCanon.ctx.fillStyle = 'rgba(0,0,0,0.05)';
     fireworkCanon.ctx.fillRect(0,0,innerWidth,innerHeight);
-
+    let staticColor = fireworkCanon.colorSet[0]
     let canon = new mainCanon(fireworkCanon.ctx);
-    canon.draw(innerWidth/2,innerHeight,fireworkCanon.mouse.x,fireworkCanon.mouse.y,fireworkCanon.ctx);
+    canon.draw(innerWidth/2,innerHeight,fireworkCanon.mouse.x,fireworkCanon.mouse.y,fireworkCanon.ctx,staticColor);
     if (fireworkCanon.addBullet) {
-      let bullet = new bulletObj(innerWidth/2,innerHeight-100,fireworkCanon.mouse.x,fireworkCanon.mouse.y,fireworkCanon.ctx,fireworkCanon.colorSet);
+      let bullet = new bulletObj(innerWidth/2,innerHeight-100,fireworkCanon.mouse.x,fireworkCanon.mouse.y,fireworkCanon.ctx,staticColor);
       fireworkCanon.bullets.push(bullet);
     }
     for (var i = 0; i < fireworkCanon.bullets.length; i++) {

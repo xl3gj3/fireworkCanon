@@ -2,7 +2,7 @@
 function mainCanon (){
 }
 
-mainCanon.prototype.draw = function (postionX,positionY,mouseX,mouseY,ctx){
+mainCanon.prototype.draw = function (postionX,positionY,mouseX,mouseY,ctx,color){
   let opposite = fireworkCanon.canvas.height - mouseY;
   let adjacent = postionX - mouseX;
   // console.log("opposite",opposite);
@@ -10,7 +10,7 @@ mainCanon.prototype.draw = function (postionX,positionY,mouseX,mouseY,ctx){
 
   let angle = -Math.atan( adjacent/opposite);
   // console.log("the angle is ",angle);
-  ctx.fillStyle = "white";
+  ctx.fillStyle = color;
   ctx.beginPath();
   ctx.ellipse(postionX, positionY-75, 20, 75, angle, Math.PI*1.8, Math.PI*1.2);
   ctx.fill();
@@ -20,7 +20,7 @@ mainCanon.prototype.draw = function (postionX,positionY,mouseX,mouseY,ctx){
 
 
 
-function bulletObj(postionX,positionY,mouseX,mouseY,ctx,color){
+function bulletObj(postionX,positionY,mouseX,mouseY,ctx,staticColor){
   let speed = 10;
   let maxRadius = 4;
   let minRadius = 4;
@@ -28,31 +28,9 @@ function bulletObj(postionX,positionY,mouseX,mouseY,ctx,color){
   let maxTime = 1000;
   let minTime = 100;
 
-  var colorArray = [
-    "#F0F2F2",
-    "#7BB094",
-    "#8DBF28",
-    "#C0DB84",
-    "#49BA63"
-  ];
-  var colorArray2 = [
-  "#DB2B30",
-  "#8F1D2C",
-  "#5A142A",
-  "#400D2A",
-  "#140A25"
-];
-  ctx.fillStyle = color[Math.floor(Math.random() * color.length)];
+  this.color = staticColor;
+  // ctx.fillStyle = color[Math.floor(Math.random() * color.length)];
 
-  if (Math.random() - 0.5 > 0) {
-    this.fireWorkColor = colorArray;
-
-  }else {
-    // this.fireWorkColor = colorArray2;
-    this.fireWorkColor = colorArray;
-
-
-  }
   this.bulletDuriation = minTime + Math.round(Math.random()*maxTime);
   let changeXdirection = false;
 
@@ -129,17 +107,4 @@ bulletObj.prototype.update = function(canvas){
   this.bulletDuriation -= 15;
   this.x += this.dx;
   this.y += this.dy;
-}
-
-function fireworkObj (positionX,positionY,colorArray,canvas,ctx){
-  this.x = positionX;
-  this.y = positionY;
-  this.color = colorArray;
-  this.ctx = ctx;
-  this.canvas = canvas;
-
-}
-
-fireworkObj.prototype.draw = function (){
-
 }
