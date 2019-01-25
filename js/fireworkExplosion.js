@@ -19,7 +19,7 @@ function fireworkExplosion (positionX,positionY,color,canvas,ctx){
   this.lastPoint = [];
   this.radians = [];
   this.velocity = [];
-  this.numberOfexplosion = 10 + Math.floor(Math.random()*50);
+  this.numberOfexplosion = 30 + Math.floor(Math.random()*100);
   // this.radius = [];
   this.radius = 0.1 + Math.random() * 4;
   // console.log("init this.duriation",this.duriation);
