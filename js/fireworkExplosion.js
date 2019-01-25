@@ -3,6 +3,7 @@ function fireworkExplosion (positionX,positionY,color,canvas,ctx){
   let minTime = 500;
   let maxSpeed = 6;
   let minSpeed = -3;
+  this.directionBoundary = 0.125;
   this.postionX = positionX;
   this.positionY = positionY;
   // this.color = color;
@@ -16,7 +17,9 @@ function fireworkExplosion (positionX,positionY,color,canvas,ctx){
   this.y = [];
   this.color = [];
   this.lastPoint = [];
-  this.numberOfexplosion = 10 + Math.floor(Math.random()*150);
+  this.radians = [];
+  this.velocity = [];
+  this.numberOfexplosion = 10 + Math.floor(Math.random()*50);
   // this.radius = [];
   this.radius = 0.1 + Math.random() * 4;
   // console.log("init this.duriation",this.duriation);
@@ -25,6 +28,8 @@ function fireworkExplosion (positionX,positionY,color,canvas,ctx){
     this.dy.push(minSpeed + Math.random() * maxSpeed);
     this.x.push(positionX);
     this.y.push(positionY);
+    this.radians.push(Math.random() * Math.PI * 2);
+    this.velocity.push(Math.random() + 0.05);
     // this.radius.push = 0.1 + Math.random() * 5;
     this.color.push(color[Math.floor(Math.random() * color.length)]);
   }
@@ -63,6 +68,7 @@ fireworkExplosion.prototype.update = function (){
       x : this.x[i],
       y : this.y[i]
     }
+
     if (this.duriation < 0) {
       // console.log("this.disappear ",this.disappear);
 
@@ -79,8 +85,16 @@ fireworkExplosion.prototype.update = function (){
     if (this.bulletDuriation < 0) {
       this.disappear = true;
     }
-    this.x[i] = this.x[i] + this.dx[i];
-    this.y[i] = this.y[i] + this.dy[i];
+    if (Math.random()>this.directionBoundary) {
+      this.x[i] = this.x[i] + this.dx[i];
+      this.y[i] = this.y[i] + this.dy[i];
+    }else {
+      this.radians[i] += this.velocity[i];
+      this.x[i] = this.x[i] + Math.cos(this.radians[i])*5;
+      this.y[i] = this.y[i] + Math.sin(this.radians[i])*5;
+    }
+
+
   }
   this.duriation -= 15;
 
