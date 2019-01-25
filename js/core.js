@@ -76,17 +76,18 @@
     window.requestAnimationFrame(main);
     // console.log("mouse x position", fireworkCanon.mouse.x);
     // console.log("mouse y position", fireworkCanon.mouse.y);
-    fireworkCanon.ctx.clearRect(0,0,innerWidth,innerHeight);
+    fireworkCanon.ctx.fillStyle = 'rgba(0,0,0,0.05)';
+    fireworkCanon.ctx.fillRect(0,0,innerWidth,innerHeight);
 
     let canon = new mainCanon(fireworkCanon.ctx);
     canon.draw(innerWidth/2,innerHeight,fireworkCanon.mouse.x,fireworkCanon.mouse.y,fireworkCanon.ctx);
     if (fireworkCanon.addBullet) {
-      let bullet = new bulletObj(innerWidth/2,innerHeight-100,fireworkCanon.mouse.x,fireworkCanon.mouse.y,fireworkCanon.ctx);
+      let bullet = new bulletObj(innerWidth/2,innerHeight-100,fireworkCanon.mouse.x,fireworkCanon.mouse.y,fireworkCanon.ctx,fireworkCanon.colorSet);
       fireworkCanon.bullets.push(bullet);
     }
     for (var i = 0; i < fireworkCanon.bullets.length; i++) {
-      fireworkCanon.bullets[i].draw(fireworkCanon.ctx);
       fireworkCanon.bullets[i].update(fireworkCanon.canvas);
+      fireworkCanon.bullets[i].draw(fireworkCanon.ctx);
       if (fireworkCanon.bullets[i].disappear) {
         let explosion = new fireworkExplosion(fireworkCanon.bullets[i].x,fireworkCanon.bullets[i].y,fireworkCanon.colorSet,fireworkCanon.canvas,fireworkCanon.ctx);
         fireworkCanon.fireExplosion.push(explosion);
@@ -95,8 +96,9 @@
     }
     for (var i = 0; i < fireworkCanon.fireExplosion.length; i++) {
       // console.log("fireworkCanon.fireExplosion.length",fireworkCanon.fireExplosion.length);
-      fireworkCanon.fireExplosion[i].draw();
       fireworkCanon.fireExplosion[i].update();
+      fireworkCanon.fireExplosion[i].draw();
+
       if (fireworkCanon.fireExplosion[i].disappear) {
         fireworkCanon.fireExplosion.splice(i, 1);
       }
@@ -111,6 +113,7 @@
   function setEnv(){
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+    fireworkCanon.loadColor(1);
   }
   function loadEventListner (){
     window.addEventListener('resize',function(){

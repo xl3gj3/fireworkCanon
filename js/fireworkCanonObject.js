@@ -10,7 +10,7 @@ mainCanon.prototype.draw = function (postionX,positionY,mouseX,mouseY,ctx){
 
   let angle = -Math.atan( adjacent/opposite);
   // console.log("the angle is ",angle);
-  ctx.fillStyle = 'white';
+  ctx.fillStyle = "white";
   ctx.beginPath();
   ctx.ellipse(postionX, positionY-75, 20, 75, angle, Math.PI*1.8, Math.PI*1.2);
   ctx.fill();
@@ -20,9 +20,9 @@ mainCanon.prototype.draw = function (postionX,positionY,mouseX,mouseY,ctx){
 
 
 
-function bulletObj(postionX,positionY,mouseX,mouseY,ctx){
+function bulletObj(postionX,positionY,mouseX,mouseY,ctx,color){
   let speed = 10;
-  let maxRadius = 10;
+  let maxRadius = 4;
   let minRadius = 4;
   let canonLength = 75;
   let maxTime = 1000;
@@ -42,7 +42,8 @@ function bulletObj(postionX,positionY,mouseX,mouseY,ctx){
   "#400D2A",
   "#140A25"
 ];
-  this.color = "white";
+  ctx.fillStyle = color[Math.floor(Math.random() * color.length)];
+
   if (Math.random() - 0.5 > 0) {
     this.fireWorkColor = colorArray;
 
@@ -86,20 +87,33 @@ function bulletObj(postionX,positionY,mouseX,mouseY,ctx){
   // console.log("bullet dx ", this.dx);
   // console.log("bullet dy ", this.dy);
 
-  this.radius = minRadius;
+  this.radius = minRadius + Math.random() * maxRadius;
   // this.color = colorArray[Math.floor(Math.random() * colorArray.length)];
 
 }
 
 bulletObj.prototype.draw = function (ctx){
+  // ctx.beginPath();
+  // ctx.arc(this.x,this.y,this.radius,0,Math.PI*2,false);
+  // ctx.strokeStyle = this.color;
+  // ctx.fillStyle = this.color;
+  // ctx.stroke();
+  // ctx.fill();
+
   ctx.beginPath();
-  ctx.arc(this.x,this.y,this.radius,0,Math.PI*2,false);
   ctx.strokeStyle = this.color;
-  ctx.fillStyle = this.color;
+  ctx.lineWidth = this.radius;
+  ctx.moveTo(this.lastPoint.x,this.lastPoint.y);
+  ctx.lineTo(this.x,this.y);
   ctx.stroke();
-  ctx.fill();
+  ctx.closePath();
+
 }
 bulletObj.prototype.update = function(canvas){
+  this.lastPoint = {
+    x : this.x,
+    y : this.y
+  }
   this.disappear = false;
   if (this.x > canvas.width - this.radius || this.x - this.radius < 0) {
     this.dx = -this.dx;

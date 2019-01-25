@@ -15,8 +15,9 @@ function fireworkExplosion (positionX,positionY,color,canvas,ctx){
   this.x = [];
   this.y = [];
   this.color = [];
-  this.numberOfexplosion = 20 + Math.floor(Math.random()*30);
-  this.radius = 3;
+  this.lastPoint = [];
+  this.numberOfexplosion = 50 + Math.floor(Math.random()*40);
+  this.radius = 0.1 + Math.random() * 4;
   // console.log("init this.duriation",this.duriation);
   for (var i = 0; i <this.numberOfexplosion; i++) {
     this.dx.push(minSpeed + Math.random() * maxSpeed);
@@ -32,19 +33,34 @@ function fireworkExplosion (positionX,positionY,color,canvas,ctx){
 fireworkExplosion.prototype.draw = function (){
   // console.log("this color ", this.color);
   for (var i = 0; i < this.numberOfexplosion; i++) {
+    // this.ctx.beginPath();
+    // this.ctx.arc(this.x[i],this.y[i],this.radius,0,Math.PI*2,false);
+    // this.ctx.strokeStyle = this.color[i];
+    // this.ctx.fillStyle = this.color[i];
+    // this.ctx.stroke();
+    // this.ctx.fill();
+
+
     this.ctx.beginPath();
-    this.ctx.arc(this.x[i],this.y[i],this.radius,0,Math.PI*2,false);
     this.ctx.strokeStyle = this.color[i];
-    this.ctx.fillStyle = this.color[i];
+    this.ctx.lineWidth = this.radius;
+    this.ctx.moveTo(this.lastPoint[i].x,this.lastPoint[i].y);
+    this.ctx.lineTo(this.x[i],this.y[i]);
     this.ctx.stroke();
-    this.ctx.fill();
+    this.ctx.closePath();
+
   }
 }
 
 fireworkExplosion.prototype.update = function (){
   // console.log("the duriation of firework is ",this.duriation);
 
+
   for (var i = 0; i < this.numberOfexplosion; i++) {
+    this.lastPoint[i] = {
+      x : this.x[i],
+      y : this.y[i]
+    }
     if (this.duriation < 0) {
       // console.log("this.disappear ",this.disappear);
 
